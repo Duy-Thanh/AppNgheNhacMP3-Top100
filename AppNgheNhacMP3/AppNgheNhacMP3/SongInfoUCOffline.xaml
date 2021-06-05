@@ -1,0 +1,97 @@
+﻿<UserControl x:Class="AppNgheNhacMP3.SongInfoUCOffline"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AppNgheNhacMP3"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="200"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Button Click="Button_Click">Back</Button>
+            </Grid>
+            <Grid Grid.Column="1">
+                <Label Content="{Binding SongName}"></Label>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Canvas x:Name="myCanvas" Grid.Row="0" Background="Aqua">
+                <MediaElement LoadedBehavior="Manual" MediaOpened="mediaPlayer_MediaOpened" Width="0" Height="0" x:Name="mediaPlayer" Source="{Binding SavePath}"></MediaElement>
+                <Grid Width="{Binding ActualWidth, ElementName=myCanvas}" 
+          Height="{Binding ActualHeight, ElementName=myCanvas}">
+                    <Image Source="{Binding PhotoURL}" HorizontalAlignment="Center"
+               VerticalAlignment="Center"></Image>
+                </Grid>
+                <Grid Width="{Binding ActualWidth, ElementName=myCanvas}" 
+          Height="{Binding ActualHeight, ElementName=myCanvas}">
+                    <!--<Label Background="White" Content="{Binding SongName}"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Center"-->
+                    <!--/>-->
+                </Grid>
+            </Canvas>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid>
+                        <Button x:Name="btnPlay" Click="Button_Click_1">Play</Button>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <Button Click="Button_Click_2">Previous</Button>
+                    </Grid>
+                    <Grid Grid.Column="2">
+                        <Button Click="Button_Click_3">Next</Button>
+                    </Grid>
+                    <Grid Grid.Column="3">
+                        <ToggleButton Checked="ToggleButton_Checked">1.0</ToggleButton>
+                    </Grid>
+                    <Grid Grid.Column="4">
+                        <Button x:Name="btnStop" Click="Button_Click_4">Stop</Button>
+                    </Grid>
+                </Grid>
+
+                <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="40"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width="40"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock x:Name="txbPostition"></TextBlock>
+                    <Slider Grid.Column="1" PreviewMouseDown="sdDuration_MouseDown" PreviewMouseUp="sdDuration_MouseUp" ValueChanged="sdDuration_ValueChanged" x:Name="sdDuration" HorizontalAlignment="Stretch"></Slider>
+                    <TextBlock x:Name="txbDuration" Grid.Column="2"></TextBlock>
+                </Grid>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <WebBrowser x:Name="webLyric" DataContext="{Binding Lyric}"></WebBrowser>
+            <!--<TextBlock x:Name="txbLyric" Text="{Binding Lyric}"></TextBlock>-->
+        </Grid>
+    </Grid>
+</UserControl>
